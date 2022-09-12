@@ -1,0 +1,14 @@
+{% load static %}
+<div class="widget">
+    <h4 class="rheading">Entradas recientes<span></span></h4>
+    <ul class="recent-posts">
+    {% for b in recentBlogs %}
+      <li><a href="{% url 'main:blog' slug=b.slug %}">{{b.titulo}}</a>
+        <div class="clear">
+        </div>
+        <span class="date"><i class="icon-calendar"></i>{{b.fecha}}</span>
+        <span class="comment"><i class="icon-comment"></i> 4 Comments</span>
+      </li>
+    {% endfor %}
+    </ul>
+</div>
