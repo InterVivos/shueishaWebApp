@@ -3,7 +3,10 @@ from webbrowser import get
 from django.shortcuts import render
 from django.contrib import messages
 from .models import (
-    Blog
+    Anime,
+    Blog,
+    Manga,
+    Review
 )
 from .forms import BlogCreateForm
 from django.http import HttpResponseRedirect
@@ -29,6 +32,17 @@ class RecentBlogs(generic.base.ContextMixin):
 
         return context
 
+class GetReviews(generic.base.ContextMixin):
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        reviews = None
+        if isinstance(self.object, Manga): reviews = Review.objects.filter(manga=self.object)
+        else: reviews = Review.objects.filter(anime=self.object)
+        context["reviews"] = reviews
+        context["loop_n"] = range(5, 0, -1)
+
+        return context
+
 class BlogView(generic.ListView, RecentBlogs):
     model = Blog
     template_name = "main/blog.html"
@@ -40,6 +54,30 @@ class BlogView(generic.ListView, RecentBlogs):
 class BlogDetailView(generic.DetailView, RecentBlogs):
     model = Blog
     template_name = "main/blog-detail.html"
+
+class MangaView(generic.ListView):
+    model = Manga
+    template_name = "main/manga.html"
+    paginate_by = 10
+
+    def get_queryset(self):
+        return super().get_queryset().all()
+
+class MangaDetailView(generic.DetailView, GetReviews):
+    model = Manga
+    template_name = "main/manga-detail.html"
+
+class AnimeView(generic.ListView):
+    model = Anime
+    template_name = "main/anime.html"
+    paginate_by = 10
+
+    def get_queryset(self):
+        return super().get_queryset().all()
+
+class AnimeDetailView(generic.DetailView, GetReviews):
+    model = Anime
+    template_name = "main/anime-detail.html"
 
 def blogcreate(request):
     form = None

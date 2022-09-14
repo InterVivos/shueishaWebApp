@@ -1,0 +1,8 @@
+{% extends 'main/title-detail.html' %}
+{% load static %}
+
+{% block title_fields %}
+<li><label>Mangaka :</label>&nbsp;&nbsp;{{object.mangaka}}</li>
+<li><label>Publicación :</label>&nbsp;&nbsp;{{object.publicacion}}</li>
+<li><label>Volúmenes :</label>&nbsp;&nbsp;{{object.volumenes}}</li>
+{% endblock %}

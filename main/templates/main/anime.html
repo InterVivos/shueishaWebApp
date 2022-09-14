@@ -1,0 +1,16 @@
+{% extends 'main/title-base.html' %}
+{% load static %}
+
+{% block title_name %}Anime{% endblock %}
+
+{% block title_url1 %}"{% url 'main:anime' slug=obj.slug %}"{% endblock %}
+
+{% block title_date %}Primera emisión: {{obj.primera_emision}}{% endblock %}
+
+{% block title_data %}{{obj.capitulos}} {% if obj.capitulos == 1 %} capítulo {% else %} capítulos {% endif %}{% endblock %}
+
+{% block title_url2 %}"{% url 'main:manga' slug=obj.slug %}"{% endblock %}
+
+{% block title_img %}
+  {% if obj.imagen %}"{{obj.imagen.url}}"{% else %}""{% endif %}
+  {% endblock %}

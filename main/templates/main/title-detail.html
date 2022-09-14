@@ -1,0 +1,131 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block additionalCss %}
+<link href="{% static 'css/star-rating.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    <!-- Subintro
+================================================== -->
+    <section id="subintro">
+      <div class="container">
+        <div class="row">
+          <div class="span8">
+            <ul class="breadcrumb">
+              <li><a href="#"><i class="icon-home"></i></a><i class="icon-angle-right"></i></li>
+              <li><a href="#">Portfolio</a><i class="icon-angle-right"></i></li>
+              <li class="active">Portfolio detail</li>
+            </ul>
+          </div>
+          <div class="span4">
+            <div class="search">
+              <form class="input-append">
+                <input class="search-form" id="appendedPrependedInput" type="text" placeholder="Search here.." />
+                <button class="btn btn-dark" type="submit">Search</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="maincontent">
+      <div class="container">
+        <div class="row">
+          <div class="span12">
+            <article>
+              <div class="heading">
+                <h4>{{object.nombre}}</h4>
+              </div>
+              <div class="clearfix">
+              </div>
+              <div class="row">
+                <div class="span8">
+                  <!-- start flexslider -->
+                  <!-- end flexslider -->
+                  <p>{{object.descripcion}}</p>
+                </div>
+                <div class="span4">
+                  <aside>
+                    <div class="widget">
+                      <div class="project-widget">
+                        <ul class="project-detail">
+                          {% if object.imagen %}
+                          <li><img src="{{object.imagen.url}}"/></li>
+                          {% endif %}
+                          {% block title_fields %}
+                          {% endblock %}
+                        </ul>
+                      </div>
+                    </div>
+                    <div class="widget">
+                      <h4 class="rheading">Etiquetas<span></span></h4>
+                      <ul class="tags">
+                        {% for etiqueta in object.etiquetas.all %}
+                        <li><a href="#" class="btn">{{etiqueta}}</a></li>
+                        {% endfor %}
+                      </ul>
+                    </div>
+                  </aside>
+                </div>
+              </div>
+            </article>
+            <!-- end article full post -->
+            <h4>Reseñas</h4>
+            <ul class="media-list">
+              {%for r in reviews %}
+              <li class="media">
+                <a class="pull-left" href="#">
+                  <img class="media-object" src="{% static 'img/small-avatar.png' %}" alt="" />
+                </a>
+                <div class="media-body">
+                  <h5 class="media-heading"><a href="#">{{r.usuario}}</a></h5>
+                  <span>{{r.fecha}}</span>
+                  <p>{{r.mensaje}}</p>
+                  <ul style="list-style: none;">{% for i in loop_n %}<li style="float: right;"><i class="icon icon-star{% if i <= r.estrellas %}"{% else %}-empty"{% endif %}></i></li>
+                    {% endfor %}</ul>
+                  </a>
+                  <div class="clearfix">
+                  </div>
+                </div>
+              </li>
+              {% endfor %}
+            </ul>
+            <div class="comment-post">
+              <h4>Agrega una reseña</h4>
+              <form action="" method="post" class="comment-form" name="comment-form">
+                <div class="column">
+                  <div class="span4">
+                    <label>Nombre <span>*</span></label>
+                    <input type="text" class="input-block-level" placeholder="Tu nombre" />
+                  </div>
+                  <div class="span8">
+                    <label>Valoración <span>*</span></label>
+                    <div class="rating" style="width: 150px; height:60px">
+                      <input id="star5" name="star" type="radio" value="5" class="radio-btn hide" />
+                      <label for="star5" class="icon icon-star-empty">&nbsp;</label>
+                      <input id="star4" name="star" type="radio" value="4" class="radio-btn hide" />
+                      <label for="star4" class="icon icon-star-empty">&nbsp;</label>
+                      <input id="star3" name="star" type="radio" value="3" class="radio-btn hide" />
+                      <label for="star3" class="icon icon-star-empty">&nbsp;</label>
+                      <input id="star2" name="star" type="radio" value="2" class="radio-btn hide" />
+                      <label for="star2" class="icon icon-star-empty">&nbsp;</label>
+                      <input id="star1" name="star" type="radio" value="1" class="radio-btn hide" />
+                      <label for="star1" class="icon icon-star-empty">&nbsp;</label>
+                      <div class="clear"></div>
+                    </div>
+                  </div>
+                  </div>
+                    <div class="span8">
+                      <label>Reseña <span>*</span></label>
+                      <textarea rows="9" class="input-block-level" placeholder="Tu reseña"></textarea>
+                      <button class="btn btn-theme" type="submit">Publicar reseña</button>
+                    </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+{% endblock %}

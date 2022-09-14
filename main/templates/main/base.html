@@ -17,7 +17,8 @@
   <link href="{% static 'css/style.css' %}" rel="stylesheet">
   <link href="{% static 'color/default.css' %}" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,600,400italic|Open+Sans:400,600,700" rel="stylesheet">
-
+  {% block additionalCss %}
+  {% endblock %}
   <!-- fav and touch icons -->
   <link rel="shortcut icon" href="{% static 'ico/favicon.ico' %}">
   <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{% static 'ico/apple-touch-icon-144-precomposed.png' %}">
@@ -55,39 +56,14 @@
                   <li class="active">
                     <a href="index.html"><i class="icon-home"></i> Inicio </a>
                   </li>
-                  <li class="dropdown">
-                    <a href="#"><i class="icon-columns"></i>  Manga <i class="icon-angle-down"></i></a>
-                    <ul class="dropdown-menu">
-                      <li><a href="media.html">Media</a></li>
-                      <li><a href="color-scheme.html">10 Theme colors</a></li>
-                      <li><a href="buttons.html">Buttons</a></li>
-                      <li><a href="components.html">Components</a></li>
-                      <li><a href="animations.html">56 Animations</a></li>
-                      <li><a href="icons.html">Icons</a></li>
-                      <li><a href="icon-variations.html">Icon variations</a></li>
-                      <li class="dropdown"><a href="#">3rd level <i class="icon-angle-right"></i></a>
-                        <ul class="dropdown-menu sub-menu">
-                          <li><a href="#">Example menu</a></li>
-                          <li><a href="#">Example menu</a></li>
-                          <li><a href="#">Example menu</a></li>
-                        </ul>
-                      </li>
-                    </ul>
+                  <li>
+                    <a href="{% url 'main:mangas' %}"><i class="icon-columns"></i>  Manga </a>
                   </li>
-                  <li class="dropdown">
-                    <a href="#"> <i class="icon-film"></i> Anime <i class="icon-angle-down"></i></a>
-                    <ul class="dropdown-menu">
-                      <li><a href="about.html">About us</a></li>
-                      <li><a href="pricingbox.html">Pricing boxes</a></li>
-                      <li><a href="testimonials.html">Testimonials</a></li>
-                      <li><a href="404.html">404</a></li>
-                    </ul>
+                  <li>
+                    <a href="{% url 'main:animes' %}"> <i class="icon-film"></i> Anime </a>
                   </li>
                   <li>
                     <a href="{% url 'main:blogs' %}"><i class="icon-book"></i> Blog </a>
-                  </li>
-                  <li>
-                    <a href="contact.html"><i class="icon-user"></i> Ingresar </a>
                   </li>
                 </ul>
               </nav>

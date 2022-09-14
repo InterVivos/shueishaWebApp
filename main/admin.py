@@ -7,6 +7,7 @@ from . models import (
     Mangaka,
     Manga,
     Anime,
+    Review,
 )
 # Register your models here.
 @admin.register(Autor)
@@ -31,9 +32,15 @@ class MangakaAdmin(admin.ModelAdmin):
     list_display = ('id', 'nombre')
 
 @admin.register(Manga)
-class MangakaAdmin(admin.ModelAdmin):
+class MangaAdmin(admin.ModelAdmin):
     list_display = ('id', 'nombre', 'mangaka')
+    readonly_fields = ('slug',)
 
 @admin.register(Anime)
 class AnimeAdmin(admin.ModelAdmin):
     list_display = ('id', 'nombre')
+    readonly_fields = ('slug',)
+
+@admin.register(Review)
+class ReviewAdmin(admin.ModelAdmin):
+    list_display = ('id', 'usuario', 'fecha', 'manga', 'anime', 'estrellas')

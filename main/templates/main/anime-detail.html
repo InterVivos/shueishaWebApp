@@ -1,0 +1,9 @@
+{% extends 'main/title-detail.html' %}
+{% load static %}
+{% load duration_format %}
+
+{% block title_fields %}
+<li><label>Capítulos :</label>&nbsp;&nbsp;{{object.capitulos}}</li>
+<li><label>Primera emisión :</label>&nbsp;&nbsp;{{object.primera_emision}}</li>
+<li><label>Duración :</label>&nbsp;&nbsp;{{object.duracion|duration}} aprox. por capítulo</li>
+{% endblock %}

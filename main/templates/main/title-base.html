@@ -1,0 +1,76 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block additionalCss %}
+<link href="{% static 'css/content.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+
+    <!-- Subintro
+================================================== -->
+    <section id="subintro">
+      <div class="container">
+        <div class="row">
+          <div class="span8">
+            <ul class="breadcrumb">
+              <li><a href="#"><i class="icon-home"></i></a><i class="icon-angle-right"></i></li>
+              <li><a href="#">Blog</a><i class="icon-angle-right"></i></li>
+              <li class="active">Single post with left sidebar</li>
+            </ul>
+          </div>
+          <div class="span4">
+            <div class="search">
+              <form class="input-append">
+                <input class="search-form" id="appendedPrependedInput" type="text" placeholder="Search here.." />
+                <button class="btn btn-dark" type="submit">Search</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="maincontent">
+      <div class="container">
+            <!-- start article full post -->
+            <div class="container1 py-5">
+              <div class="row text-center text-white mb-5">
+                  <div class="col-lg-7 mx-auto">
+                      <h1 class="display-4">{% block title_name %}{% endblock %}</h1>
+                  </div>
+              </div>
+              <div class="row1">
+                  <div class="col-lg-8 mx-auto" style="width: 100%;">
+                      <!-- List group-->
+                      <ul class="list-group shadow">
+                          <!-- list group item-->
+                          {% for obj in object_list %}
+                          <li class="list-group-item">
+                              <!-- Custom content-->
+                              <div class="media align-items-lg-center flex-column flex-lg-row p-3">
+                                  <div class="media-body order-2 order-lg-1">
+                                      <h5 class="mt-0 font-weight-bold mb-2"><a href={% block title_url1 %}{% endblock %}>{{obj.nombre}}</a></h5>
+                                      <p class="font-italic text-muted mb-0 small">{% block title_date %}{% endblock %}</p>
+                                      <div class="d-flex align-items-center justify-content-between mt-1">
+                                          <h6 class="font-weight-bold my-2">{% block title_data %}{% endblock %}</h6>
+                                          <ul class="list-inline small">
+                                              <li class="list-inline-item m-0"><i class="icon-star text-success"></i></li>
+                                              <li class="list-inline-item m-0"><i class="icon-star text-success"></i></li>
+                                              <li class="list-inline-item m-0"><i class="icon-star text-success"></i></li>
+                                              <li class="list-inline-item m-0"><i class="icon-star text-success"></i></li>
+                                              <li class="list-inline-item m-0"><i class="icon-star-empty text-gray"></i></li>
+                                          </ul>
+                                      </div>
+                                  </div><a href={% block title_url2 %}{% endblock %}><img src={% block title_img %}{% endblock %} alt="Generic placeholder image" width="200" class="ml-lg-5 order-1 order-lg-2" style="height: 170px; width: 140px;"></a>
+                              </div> <!-- End -->
+                          </li> <!-- End -->
+                          {% endfor %}
+                      </ul> <!-- End -->
+                  </div>
+              </div>
+          </div>
+            <!-- end article full post -->
+          {% include 'main/partials/page-number.html' %}
+      </div>
+    </section>
+{% endblock %}

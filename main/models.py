@@ -1,5 +1,3 @@
-from dataclasses import fields
-from tabnanny import verbose
 from django.db import models
 from django.contrib.auth.models import User
 from django.template.defaultfilters import slugify
@@ -99,10 +97,20 @@ class Manga(models.Model):
     publicacion = models.DateField()
     volumenes = models.IntegerField(default=1)
     descripcion = models.CharField(max_length=500, blank=True, null=True)
+    imagen = models.ImageField(blank=True, null=True, upload_to="manga")
     etiquetas = models.ManyToManyField(Etiqueta, blank=True)
+    slug = models.SlugField(null=True, blank=True)
 
     def __str__(self):
         return self.nombre
+    
+    def save(self, *args, **kwargs):
+        if not self.id:
+            self.slug = slugify(self.nombre)
+        super(Manga, self).save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return f"/manga/{self.slug}"
 
 class Anime(models.Model):
     class Meta:
@@ -115,7 +123,41 @@ class Anime(models.Model):
     capitulos = models.IntegerField(default=1)
     duracion = models.DurationField(null=True)
     descripcion = models.CharField(max_length=500, blank=True, null=True)
+    imagen = models.ImageField(blank=True, null=True, upload_to="anime")
     etiquetas = models.ManyToManyField(Etiqueta, blank=True)
+    slug = models.SlugField(null=True, blank=True)
 
     def __str__(self):
         return self.nombre
+
+    def save(self, *args, **kwargs):
+        if not self.id:
+            self.slug = slugify(self.nombre)
+        super(Anime, self).save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return f"/anime/{self.slug}"
+
+class Review(models.Model):
+    class Meta:
+        verbose_name_plural = 'Reviews'
+        verbose_name = 'Review'
+        ordering = ['-fecha']
+        constraints = [
+            models.CheckConstraint(
+                name="%(app_label)s_%(class)s_anime_or_manga",
+                check=(
+                    models.Q(manga__isnull=True, anime__isnull=False)
+                    | models.Q(manga__isnull=False, anime__isnull=True)
+                ),
+            )
+        ]
+    
+    opciones_calif = [(1, '1'), (2, '2'), (3, '3'), (4, '4'), (5, '5')]
+    
+    usuario = models.CharField(max_length=100, null=True)
+    manga = models.ForeignKey(Manga, on_delete=models.CASCADE, blank=True, null=True)
+    anime = models.ForeignKey(Anime, on_delete=models.CASCADE, blank=True, null=True)
+    fecha = models.DateTimeField(auto_now_add=True)
+    estrellas = models.PositiveIntegerField(default=1, null=True, choices=opciones_calif)
+    mensaje = models.CharField(max_length=500, null=True)
