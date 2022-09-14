@@ -68,7 +68,7 @@
           <div class="span4">
             <aside>
               <div class="widget">
-                <a href="#" class="btn btn-theme" style="width: 90%;"><i class="icon-plus"></i>Nuevo blog</a>
+                <a href="{% url 'main:blog-create' %}"" class="btn btn-theme" style="width: 90%;"><i class="icon-plus"></i>Nuevo blog</a>
               </div>
               {% include 'main/partials/recent-blogs.html' %}
               <div class="widget">

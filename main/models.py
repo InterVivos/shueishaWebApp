@@ -1,8 +1,10 @@
+from dataclasses import fields
 from tabnanny import verbose
 from django.db import models
 from django.contrib.auth.models import User
 from django.template.defaultfilters import slugify
 from ckeditor.fields import RichTextField
+from ckeditor_uploader.fields import RichTextUploadingField
 
 # Create your models here.
 class Autor(models.Model):
@@ -59,7 +61,7 @@ class Blog(models.Model):
     autor = models.ForeignKey(Autor, on_delete=models.CASCADE, null=True)
     titulo = models.CharField(max_length=200, blank=True, null=True)
     descripcion = models.CharField(max_length=500, blank=True, null=True)
-    contenido = RichTextField(blank=True, null=True)
+    contenido = RichTextUploadingField(blank=True, null=True)
     slug = models.SlugField(null=True, blank=True)
     imagen = models.ImageField(blank=True, null=True, upload_to="blog")
     etiquetas = models.ManyToManyField(Etiqueta, blank=True)
