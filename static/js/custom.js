@@ -81,7 +81,7 @@ jQuery(document).ready(function($) {
   $('ul.da-thumbs > li').hoverdir();
 
   //add effect on box
-  $(".box").hover(
+/*   $(".box").hover(
     function() {
       $(this).find('.icon').addClass("animated fadeInDown");
       $(this).find('h4').addClass("animated fadeInUp");
@@ -90,7 +90,7 @@ jQuery(document).ready(function($) {
       $(this).find('.icon').removeClass("animated fadeInDown");
       $(this).find('h4').removeClass("animated fadeInUp");
     }
-  );
+  ); */
 
   // flexslider
   $('.flexslider').flexslider({

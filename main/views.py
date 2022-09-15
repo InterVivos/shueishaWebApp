@@ -1,5 +1,5 @@
-from django.shortcuts import get_object_or_404, render
 from django.contrib import messages
+from django.shortcuts import render
 from .models import (
     Anime,
     Blog,
