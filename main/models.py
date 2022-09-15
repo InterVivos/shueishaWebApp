@@ -143,7 +143,7 @@ class Review(models.Model):
         verbose_name_plural = 'Reviews'
         verbose_name = 'Review'
         ordering = ['-fecha']
-        constraints = [
+        """ constraints = [
             models.CheckConstraint(
                 name="%(app_label)s_%(class)s_anime_or_manga",
                 check=(
@@ -151,13 +151,13 @@ class Review(models.Model):
                     | models.Q(manga__isnull=False, anime__isnull=True)
                 ),
             )
-        ]
+        ] """
     
     opciones_calif = [(1, '1'), (2, '2'), (3, '3'), (4, '4'), (5, '5')]
     
     usuario = models.CharField(max_length=100, null=True)
-    manga = models.ForeignKey(Manga, on_delete=models.CASCADE, blank=True, null=True)
-    anime = models.ForeignKey(Anime, on_delete=models.CASCADE, blank=True, null=True)
+    manga = models.ForeignKey(Manga, on_delete=models.CASCADE, blank=True, null=True, default=None)
+    anime = models.ForeignKey(Anime, on_delete=models.CASCADE, blank=True, null=True, default=None)
     fecha = models.DateTimeField(auto_now_add=True)
     estrellas = models.PositiveIntegerField(default=1, null=True, choices=opciones_calif)
     mensaje = models.CharField(max_length=500, null=True)

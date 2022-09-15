@@ -1,6 +1,4 @@
-from urllib import request
-from webbrowser import get
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from django.contrib import messages
 from .models import (
     Anime,
@@ -8,7 +6,7 @@ from .models import (
     Manga,
     Review
 )
-from .forms import BlogCreateForm
+from .forms import BlogCreateForm, CreateReview
 from django.http import HttpResponseRedirect
 from django.views import generic
 # Create your views here.
@@ -32,16 +30,52 @@ class RecentBlogs(generic.base.ContextMixin):
 
         return context
 
-class GetReviews(generic.base.ContextMixin):
+class GetReviews(generic.edit.FormMixin):
+    form_class = CreateReview
+    success_url = "/"
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         reviews = None
-        if isinstance(self.object, Manga): reviews = Review.objects.filter(manga=self.object)
-        else: reviews = Review.objects.filter(anime=self.object)
+        if isinstance(self.object, Manga):
+            reviews = Review.objects.filter(manga=self.object)
+        else:
+            reviews = Review.objects.filter(anime=self.object)
+        
+        context["form"] = CreateReview()
         context["reviews"] = reviews
         context["loop_n"] = range(5, 0, -1)
 
         return context
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        form = self.get_form()
+
+        if form.is_valid():
+            form1 = form.save(commit=False)
+            if isinstance(self.object, Manga):
+                form1.manga = self.object
+            else:
+                form1.anime = self.object
+            form1.save()
+            return self.form_valid(form1)
+        else:
+            return self.form_invalid(form)
+
+    def form_valid(self, form):
+        form.save()
+        messages.success(self.request, "Reseña publicada exitosamente")
+        return super().form_valid(form)
+    
+    def form_invalid(self, form):
+        messages.success(self.request, form.errors)
+        messages.error(self.request, form.cleaned_data['anime'])
+        print(form.errors)
+        print('usuario:', form['usuario'].value())
+        print('manga:', form['manga'].value())
+        print('anime:', form['anime'].value())
+        return super().form_invalid(form)
 
 class BlogView(generic.ListView, RecentBlogs):
     model = Blog

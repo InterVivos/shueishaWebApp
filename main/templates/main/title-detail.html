@@ -94,23 +94,24 @@
             <div class="comment-post">
               <h4>Agrega una reseña</h4>
               <form action="" method="post" class="comment-form" name="comment-form">
+                {% csrf_token %}
                 <div class="column">
                   <div class="span4">
                     <label>Nombre <span>*</span></label>
-                    <input type="text" class="input-block-level" placeholder="Tu nombre" />
+                    <input type="text" class="input-block-level" placeholder="Tu nombre" name="usuario"/>
                   </div>
                   <div class="span8">
                     <label>Valoración <span>*</span></label>
                     <div class="rating" style="width: 150px; height:60px">
-                      <input id="star5" name="star" type="radio" value="5" class="radio-btn hide" />
+                      <input id="star5" name="estrellas" type="radio" value="5" class="radio-btn hide" />
                       <label for="star5" class="icon icon-star-empty">&nbsp;</label>
-                      <input id="star4" name="star" type="radio" value="4" class="radio-btn hide" />
+                      <input id="star4" name="estrellas" type="radio" value="4" class="radio-btn hide" />
                       <label for="star4" class="icon icon-star-empty">&nbsp;</label>
-                      <input id="star3" name="star" type="radio" value="3" class="radio-btn hide" />
+                      <input id="star3" name="estrellas" type="radio" value="3" class="radio-btn hide" />
                       <label for="star3" class="icon icon-star-empty">&nbsp;</label>
-                      <input id="star2" name="star" type="radio" value="2" class="radio-btn hide" />
+                      <input id="star2" name="estrellas" type="radio" value="2" class="radio-btn hide" />
                       <label for="star2" class="icon icon-star-empty">&nbsp;</label>
-                      <input id="star1" name="star" type="radio" value="1" class="radio-btn hide" />
+                      <input id="star1" name="estrellas" type="radio" value="1" class="radio-btn hide" />
                       <label for="star1" class="icon icon-star-empty">&nbsp;</label>
                       <div class="clear"></div>
                     </div>
@@ -118,7 +119,7 @@
                   </div>
                     <div class="span8">
                       <label>Reseña <span>*</span></label>
-                      <textarea rows="9" class="input-block-level" placeholder="Tu reseña"></textarea>
+                      <textarea rows="9" class="input-block-level" placeholder="Tu reseña" name="mensaje"></textarea>
                       <button class="btn btn-theme" type="submit">Publicar reseña</button>
                     </div>
                 </div>
