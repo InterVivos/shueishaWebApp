@@ -1,8 +1,12 @@
 .txt-center {
     text-align: center;
   }
-  .hide {
-    display: none;
+  .hide1 {
+    /*display: none;*/
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    pointer-events: none;
   }
   
   .clear {

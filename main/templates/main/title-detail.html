@@ -32,6 +32,15 @@
     <section id="maincontent">
       <div class="container">
         <div class="row">
+          {% for message in messages %}
+            {% if message.tags %}
+            <div class="span8">
+              <div class="alert alert-{{message.tags}}">
+                <button type="button" class="close" data-dismiss="alert">×</button>{{message}}
+              </div>
+            </div>
+            {% endif %}
+          {% endfor %}
           <div class="span12">
             <article>
               <div class="heading">
@@ -98,20 +107,20 @@
                 <div class="column">
                   <div class="span4">
                     <label>Nombre <span>*</span></label>
-                    <input type="text" class="input-block-level" placeholder="Tu nombre" name="usuario"/>
+                    <input type="text" class="input-block-level" placeholder="Tu nombre" name="usuario" required/>
                   </div>
                   <div class="span8">
                     <label>Valoración <span>*</span></label>
-                    <div class="rating" style="width: 150px; height:60px">
-                      <input id="star5" name="estrellas" type="radio" value="5" class="radio-btn hide" />
+                    <div class="rating" style="width: 150px; height:60px; position: relative;">
+                      <input id="star5" name="estrellas" type="radio" value="5" class="radio-btn hide1" required="true"/>
                       <label for="star5" class="icon icon-star-empty">&nbsp;</label>
-                      <input id="star4" name="estrellas" type="radio" value="4" class="radio-btn hide" />
+                      <input id="star4" name="estrellas" type="radio" value="4" class="radio-btn hide1" />
                       <label for="star4" class="icon icon-star-empty">&nbsp;</label>
-                      <input id="star3" name="estrellas" type="radio" value="3" class="radio-btn hide" />
+                      <input id="star3" name="estrellas" type="radio" value="3" class="radio-btn hide1" />
                       <label for="star3" class="icon icon-star-empty">&nbsp;</label>
-                      <input id="star2" name="estrellas" type="radio" value="2" class="radio-btn hide" />
+                      <input id="star2" name="estrellas" type="radio" value="2" class="radio-btn hide1" />
                       <label for="star2" class="icon icon-star-empty">&nbsp;</label>
-                      <input id="star1" name="estrellas" type="radio" value="1" class="radio-btn hide" />
+                      <input id="star1" name="estrellas" type="radio" value="1" class="radio-btn hide1" />
                       <label for="star1" class="icon icon-star-empty">&nbsp;</label>
                       <div class="clear"></div>
                     </div>
@@ -119,7 +128,7 @@
                   </div>
                     <div class="span8">
                       <label>Reseña <span>*</span></label>
-                      <textarea rows="9" class="input-block-level" placeholder="Tu reseña" name="mensaje"></textarea>
+                      <textarea rows="9" class="input-block-level" placeholder="Tu reseña" name="mensaje" required></textarea>
                       <button class="btn btn-theme" type="submit">Publicar reseña</button>
                     </div>
                 </div>

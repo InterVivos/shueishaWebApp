@@ -32,7 +32,10 @@ class RecentBlogs(generic.base.ContextMixin):
 
 class GetReviews(generic.edit.FormMixin):
     form_class = CreateReview
-    success_url = "/"
+    formSent = None
+    
+    def get_success_url(self):
+        return self.request.path
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
