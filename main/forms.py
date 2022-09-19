@@ -1,6 +1,7 @@
 from django import forms
-from ckeditor.fields import RichTextFormField
-from .models import Anime, Blog, Manga, Review
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
+from .models import Blog, Review
 
 class BlogCreateForm(forms.ModelForm):
     class Meta:
@@ -8,7 +9,11 @@ class BlogCreateForm(forms.ModelForm):
         fields = ['autor', 'titulo', 'descripcion', 'contenido', 'imagen', 'etiquetas']
 
 class CreateReview(forms.ModelForm):
-
     class Meta:
         model = Review
-        fields = ('manga', 'anime', 'usuario', 'estrellas', 'mensaje')
+        fields = ['manga', 'anime', 'usuario', 'estrellas', 'mensaje']
+
+class CreateUserForm(UserCreationForm):
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'password1', 'password2']

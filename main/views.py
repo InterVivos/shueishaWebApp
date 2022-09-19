@@ -1,5 +1,7 @@
+from email import message
 from django.contrib import messages
-from django.shortcuts import render
+from django.contrib.auth import authenticate
+from django.shortcuts import redirect, render
 from .models import (
     Anime,
     Blog,
@@ -72,12 +74,7 @@ class GetReviews(generic.edit.FormMixin):
         return super().form_valid(form)
     
     def form_invalid(self, form):
-        messages.success(self.request, form.errors)
-        messages.error(self.request, form.cleaned_data['anime'])
-        print(form.errors)
-        print('usuario:', form['usuario'].value())
-        print('manga:', form['manga'].value())
-        print('anime:', form['anime'].value())
+        messages.error(self.request, "Error al publicar reseña")
         return super().form_invalid(form)
 
 class BlogView(generic.ListView, RecentBlogs):
@@ -126,3 +123,22 @@ def blogcreate(request):
     else:
         form = BlogCreateForm()
     return render(request, 'main/blog-create.html',{'form':form})
+
+def login(request):
+    if request.user.is_authenticated:
+        return redirect('main:home')
+    else:
+        if request.method == "POST":
+            username = request.POST.get("username")
+            password = request.POST.get("password")
+            
+            user = authenticate(request, username=username, password=password)
+
+            if user is not None:
+                login(request, user)
+                return redirect("main:home")
+            else:
+                message.error(request, "Usuario o contraseña incorrecta")
+
+        context = {}
+        return render(request, "main/login.html", context)

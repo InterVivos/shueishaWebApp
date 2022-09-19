@@ -1,0 +1,104 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block content %}
+    <!-- Subintro
+================================================== -->
+<section id="subintro">
+    <div class="container">
+      <div class="row">
+        <div class="span8">
+          <ul class="breadcrumb">
+            <li><a href="#"><i class="icon-home"></i></a><i class="icon-angle-right"></i></li>
+            <li><a href="#">Features</a><i class="icon-angle-right"></i></li>
+            <li class="active">Components</li>
+          </ul>
+        </div>
+        <div class="span4">
+          <div class="search">
+            <form class="input-append">
+              <input class="search-form" id="appendedPrependedInput" type="text" placeholder="Search here.." />
+              <button class="btn btn-dark" type="submit">Search</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id="maincontent" class="demo">
+    <div class="container">
+      <div class="row">
+        <div class="span12">
+          <div class="row">
+            <div>
+              <!-- <h4 class="rheading">Tab<span></span></h4> -->
+              <div class="tabbable tabs-top">
+                <ul class="nav nav-tabs">
+                  <li class="active" style="width: 50%"><a href="#login" data-toggle="tab"><h5><i class="icon-signin"></i> Iniciar sesión</h5></a></li>
+                  <li style="width: 50%"><a href="#register" data-toggle="tab"><h5><i class="icon-edit"></i> Registrarse</h5></a></li>
+                </ul>
+                <div class="tab-content">
+                  <div class="tab-pane active" id="login">
+                    <div class="span8">
+                        <form action="" method="post" role="form" class="contactForm">
+                            <div class="row">
+                              <div class="span8 form-group">
+                                <label>Nombre de usuario <span>*</span></label>
+                                <input type="text" name="name" class="input-block-level" id="name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
+                                <div class="validation"></div>
+                              </div>
+                              <div class="span8 form-group">
+                                <label>Contraseña <span>*</span></label>
+                                <input type="password" class="input-block-level" name="password1" id="password" data-rule="minlen:8" data-msg="Please enter at least 8 chars of subject"/>
+                                <i class="icon icon-eye-open" id="togglePassword" style="margin-left: -30px; cursor: pointer; position: absolute; transform: translateY(30%);"></i>
+                                <div class="validation"></div>
+                              </div>
+                              <div class="span8 form-group">
+                                <button class="btn btn-theme" style="width: 100%;" type="submit">Iniciar sesión</button>
+                              </div>
+                            </div>
+                        </form>
+                    </div>
+                  </div>
+                  <div class="tab-pane" id="register" style="margin: 0 auto;">
+                    <div class="span8">
+                        <form action="" method="post" role="form" class="contactForm">
+                            <div class="row">
+                              <div class="span8 form-group">
+                                <label>Nombre de usuario <span>*</span></label>
+                                <input type="text" name="name" class="input-block-level" id="name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
+                                <div class="validation"></div>
+                              </div>
+              
+                              <div class="span8 form-group">
+                                <label>Correo electrónico <span>*</span></label>
+                                <input type="email" class="input-block-level" name="email" id="email" data-rule="email" data-msg="Please enter a valid email" />
+                                <div class="validation"></div>
+                              </div>
+                              <div class="span8 form-group">
+                                <label>Contraseña <span>*</span></label>
+                                <input type="password" class="input-block-level" name="password1" id="password1" data-rule="minlen:8" data-msg="Please enter at least 8 chars of subject" />
+                                <div class="validation"></div>
+                              </div>
+                              <div class="span8 form-group">
+                                <label>Confirmar contraseña <span>*</span></label>
+                                <input type="password" class="input-block-level" name="password2" id="password2" data-rule="minlen:8" data-msg="Please enter at least 8 chars of subject" />
+                                <div class="validation"></div>
+                              </div>
+                              <div class="span8 form-group">
+                                <button class="btn btn-theme" style="width: 100%;" type="submit">Crear cuenta</button>
+                              </div>
+                            </div>
+                        </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- end tab -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}
