@@ -1,6 +1,6 @@
 from email import message
 from django.contrib import messages
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, login
 from django.shortcuts import redirect, render
 from .models import (
     Anime,
@@ -8,7 +8,7 @@ from .models import (
     Manga,
     Review
 )
-from .forms import BlogCreateForm, CreateReview
+from .forms import BlogCreateForm, CreateReview, CreateUserForm
 from django.http import HttpResponseRedirect
 from django.views import generic
 # Create your views here.
@@ -124,7 +124,23 @@ def blogcreate(request):
         form = BlogCreateForm()
     return render(request, 'main/blog-create.html',{'form':form})
 
-def login(request):
+def registerPage(request):
+    if request.user.is_authenticated:
+        return redirect('main:home')
+    else:
+        form = CreateUserForm()
+        if request.method == "POST":
+            form = CreateUserForm(request.POST)
+            if form.is_valid():
+                form.save()
+                user = form.cleaned_data.get('username')
+                messages.success(request, "Account created")
+
+                return redirect("main:login")
+        context = {'form':form}
+        return render(request, 'main/register.html', context)
+
+def login1(request):
     if request.user.is_authenticated:
         return redirect('main:home')
     else:
@@ -141,4 +157,34 @@ def login(request):
                 message.error(request, "Usuario o contraseña incorrecta")
 
         context = {}
+        return render(request, "main/login.html", context)
+
+def loginRegister(request):
+    if request.user.is_authenticated:
+        return redirect('main:home')
+    else:
+        form = None
+        if request.method == "POST":
+            if 'password' in request.POST:
+                print("login in")
+                username = request.POST.get("username")
+                password = request.POST.get("password")
+                
+                user = authenticate(request, username=username, password=password)
+
+                if user is not None:
+                    login(request, user)
+                    return redirect("main:home")
+                else:
+                    messages.error(request, "Usuario o contraseña incorrecta")
+            else:
+                print("login out")
+                form = CreateUserForm(request.POST)
+                if form.is_valid():
+                    form.save()
+                    user = form.cleaned_data.get('username')
+                    messages.success(request, "Account created")
+
+                    return redirect("main:login")
+        context = {'form':form}
         return render(request, "main/login.html", context)

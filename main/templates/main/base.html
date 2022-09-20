@@ -65,8 +65,16 @@
                   <li>
                     <a href="{% url 'main:blogs' %}"><i class="icon-book"></i> Blog </a>
                   </li>
+                  {% if user.is_authenticated %}
+                  <li class="dropdown">
+                    <a href="#"><i class="icon-user"></i> {{ user.get_username }} </a>
+                    <ul class="dropdown-menu">
+                      <li><a href="{% url 'logout' %}?next={{request.path}}"><i class="icon-signout"></i> Salir</a></li>
+                    </ul>
+                  {% else %}
                   <li>
                     <a href="{% url 'main:login' %}"><i class="icon-user"></i> Ingresar </a>
+                  {% endif %}
                   </li>
                 </ul>
               </nav>

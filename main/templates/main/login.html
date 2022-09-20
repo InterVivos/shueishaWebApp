@@ -30,6 +30,15 @@
       <div class="row">
         <div class="span12">
           <div class="row">
+            {% for message in messages %}
+              {% if message.tags %}
+              <div class="span8">
+                <div class="alert alert-{{message.tags}}">
+                  <button type="button" class="close" data-dismiss="alert">×</button>{{message}}
+                </div>
+              </div>
+              {% endif %}
+            {% endfor %}
             <div>
               <!-- <h4 class="rheading">Tab<span></span></h4> -->
               <div class="tabbable tabs-top">
@@ -41,15 +50,16 @@
                   <div class="tab-pane active" id="login">
                     <div class="span8">
                         <form action="" method="post" role="form" class="contactForm">
+                          {% csrf_token %}
                             <div class="row">
                               <div class="span8 form-group">
                                 <label>Nombre de usuario <span>*</span></label>
-                                <input type="text" name="name" class="input-block-level" id="name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
+                                <input type="text" name="username" class="input-block-level" id="username" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
                                 <div class="validation"></div>
                               </div>
                               <div class="span8 form-group">
                                 <label>Contraseña <span>*</span></label>
-                                <input type="password" class="input-block-level" name="password1" id="password" data-rule="minlen:8" data-msg="Please enter at least 8 chars of subject"/>
+                                <input type="password" class="input-block-level" name="password" id="password" data-rule="minlen:8" data-msg="Please enter at least 8 chars of subject"/>
                                 <i class="icon icon-eye-open" id="togglePassword" style="margin-left: -30px; cursor: pointer; position: absolute; transform: translateY(30%);"></i>
                                 <div class="validation"></div>
                               </div>
@@ -63,10 +73,11 @@
                   <div class="tab-pane" id="register" style="margin: 0 auto;">
                     <div class="span8">
                         <form action="" method="post" role="form" class="contactForm">
+                          {% csrf_token %}
                             <div class="row">
                               <div class="span8 form-group">
                                 <label>Nombre de usuario <span>*</span></label>
-                                <input type="text" name="name" class="input-block-level" id="name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
+                                <input type="text" name="username" class="input-block-level" id="username" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
                                 <div class="validation"></div>
                               </div>
               

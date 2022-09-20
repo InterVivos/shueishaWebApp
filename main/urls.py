@@ -15,5 +15,5 @@ urlpatterns = [
     path('manga/<slug:slug>', views.MangaDetailView.as_view(), name="manga"),
     path('anime', views.AnimeView.as_view(), name="animes"),
     path('anime/<slug:slug>', views.AnimeDetailView.as_view(), name="anime"),
-    path('login', views.login, name="login"),
+    path('login', views.loginRegister, name="login"),
 ]
