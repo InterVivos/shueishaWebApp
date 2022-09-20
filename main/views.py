@@ -183,7 +183,7 @@ def loginRegister(request):
                 if form.is_valid():
                     form.save()
                     user = form.cleaned_data.get('username')
-                    messages.success(request, "Account created")
+                    messages.success(request, "Cuenta creada exitosamente, inicia sesión para acceder a la cuenta")
 
                     return redirect("main:login")
         context = {'form':form}
