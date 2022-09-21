@@ -15,7 +15,7 @@
   <link href="{% static 'js/google-code-prettify/prettify.css' %}" rel="stylesheet">
   <link href="{% static 'css/flexslider.css' %}" rel="stylesheet">
   <link href="{% static 'css/style.css' %}" rel="stylesheet">
-  <link href="{% static 'color/default.css' %}" rel="stylesheet">
+  <link href="{% static 'color/orange.css' %}" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,600,400italic|Open+Sans:400,600,700" rel="stylesheet">
   {% block additionalCss %}
   {% endblock %}
@@ -54,7 +54,7 @@
               <nav>
                 <ul class="nav topnav">
                   <li class="active">
-                    <a href="index.html"><i class="icon-home"></i> Inicio </a>
+                    <a href="{% url 'main:home' %}"><i class="icon-home"></i> Inicio </a>
                   </li>
                   <li>
                     <a href="{% url 'main:mangas' %}"><i class="icon-columns"></i>  Manga </a>

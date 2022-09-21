@@ -7,6 +7,9 @@ class BlogCreateForm(forms.ModelForm):
     class Meta:
         model = Blog
         fields = ['autor', 'titulo', 'descripcion', 'contenido', 'imagen', 'etiquetas']
+        widgets = {
+            'descripcion': forms.Textarea(attrs={'cols':200, 'rows': 4,'style': "width: 70%;"})
+        }
 
 class CreateReview(forms.ModelForm):
     class Meta:

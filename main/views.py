@@ -1,6 +1,8 @@
 from email import message
+from typing_extensions import Self
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
 from .models import (
     Anime,
@@ -113,6 +115,7 @@ class AnimeDetailView(generic.DetailView, GetReviews):
     model = Anime
     template_name = "main/anime-detail.html"
 
+@login_required(login_url='/login')
 def blogcreate(request):
     form = None
     if request.method == "POST":
@@ -174,7 +177,9 @@ def loginRegister(request):
 
                 if user is not None:
                     login(request, user)
-                    return redirect("main:home")
+                    siguiente = request.GET.get('next')
+                    if siguiente is None: return redirect('main:home')
+                    else: return redirect(siguiente)
                 else:
                     messages.error(request, "Usuario o contraseña incorrecta")
             else:
