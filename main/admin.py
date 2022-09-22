@@ -10,6 +10,10 @@ from . models import (
     Review,
 )
 # Register your models here.
+
+#Registrar modelos de la base de datos para modificarlos desde el panel de administración
+# En los que contengan slug, restringir la edición de este
+
 @admin.register(Autor)
 class AutorAdmin(admin.ModelAdmin):
     list_display = ('id', 'nombre')

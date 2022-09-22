@@ -587,9 +587,9 @@ a.scrollup i:hover {
 	opacity: 0.0;
 }
 
-.box:hover{
+li a .box:hover{
 	border-color: #a9a9a9;
-	background-color: #3498db;
+	background-color: #e95b21;
 	/*width: 105%;*/
 	/*border-bottom: 2px solid #3498db;*/
 }

@@ -17,15 +17,15 @@ from django.contrib import admin
 from django.urls import path, include, re_path
 from django.conf import settings
 from django.conf.urls.static import static
-from django.contrib.auth import logout, views
+from django.contrib.auth import views
 
-urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', include('main.urls', namespace='main')),
-    re_path(r'^ckeditor/', include('ckeditor_uploader.urls')),
-    path('logout/', views.LogoutView.as_view(), name='logout'),
+urlpatterns = [ #Incluir urls de...
+    path('admin/', admin.site.urls), #páginas de panel admin
+    path('', include('main.urls', namespace='main')), #app main
+    re_path(r'^ckeditor/', include('ckeditor_uploader.urls')), #páginas de ckeditor
+    path('logout/', views.LogoutView.as_view(), name='logout'), #página por defecto de logout
 ]
 
-if settings.DEBUG:
+if settings.DEBUG: #Si DEBUG está activado, actuar como servidor de archivos estáticos
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -10,6 +10,8 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
+"""Configuración de Django"""
+
 from pathlib import Path
 import os
 
@@ -39,7 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'ckeditor',
-    'ckeditor_uploader',
+    'ckeditor_uploader', #añadir la app main y ckeditor para los campos de texto enriquecido
     'main',
 ]
 
@@ -119,6 +121,9 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
+
+#Constantes de archivos estáticos
+
 STATIC_URL = "static/"
 STATIC_ROOT = BASE_DIR/"staticfiles"
 STATICFILES_DIRS = [
@@ -127,14 +132,15 @@ STATICFILES_DIRS = [
 ]
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
-#MEDIA_ROOT = BASE_DIR/"mediafiles"
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-CKEDITOR_UPLOAD_PATH="uploads/"
-CKEDITOR_IMAGE_BACKEND = "pillow"
+
+#Constantes de configuración de ckeditor
+CKEDITOR_UPLOAD_PATH="uploads/" # ruta de subida
+CKEDITOR_IMAGE_BACKEND = "pillow" # motor de procesamiento de imágenes
 CKEDITOR_UPLOAD_SLUGIFY_FILENAME = False
 CKEDITOR_STORAGE_BACKEND = 'django.core.files.storage.FileSystemStorage'
 
-CKEDITOR_CONFIGS = {
+CKEDITOR_CONFIGS = { # Configuración de la barra de herramientas
     'default': {
      
         'toolbar_Custom': [
